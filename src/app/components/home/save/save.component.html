@@ -1,0 +1,26 @@
+<section class="save-img" (submit)="handleSave()">
+  <form [formGroup]="createListForm">
+    <ng-container *ngIf="(options$ | async) as list">
+      <div class="form-control select">
+        <ng-container *ngIf="list.length > 0">
+          <label for="select">Select option</label>
+          <select formControlName="listOptions" id="select">
+            <option
+              *ngFor="let option of (options$ | async); let i = index"
+              [value]="i">
+              {{option}}
+            </option>
+          </select>
+        </ng-container>
+      </div>
+      <div class="form-control create">
+        <label for="create">List name</label>
+        <input id="create" type="text" formControlName="create">
+        <button type="button" (click)="handleCreate()">Create</button>
+      </div>
+      <div class="form-control submit">
+        <button [disabled]="!(list.length > 0)" class="button" type="submit">Save image</button>
+      </div>
+    </ng-container>
+  </form>
+</section>

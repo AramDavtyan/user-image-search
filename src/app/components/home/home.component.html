@@ -1,0 +1,31 @@
+<section class="wrapper">
+  <div class="search">
+    <form [formGroup]="form">
+      <label for="search">Search photos</label>
+      <input id="search" type="text" formControlName="name">
+    </form>
+    <div class="search-result">
+      <ul>
+        <li
+          *ngFor="let photo of (photos$ | async); let i = index"
+          (mouseover)="handleMouseOver(i)"
+          (mouseout)="handleMouseOut(i)">
+          <div class="photo-img">
+            <img [src]="photo?.urls?.small">
+          </div>
+          <div [ngClass]="{enable: i === hoverIndex}" class="img-info">
+            <button type="button" (click)="handleSaveImg(photo)">Save image</button>
+            <a
+              target="_blank"
+              [href]="photo?.links?.html"
+              class="author">Author page
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+<app-popup (closeButtonChange)="handleClose()" *ngIf="isPopupActive">
+  <app-save (closeButtonChange)="handleClose()" [inputItem]="inputItem"></app-save>
+</app-popup>

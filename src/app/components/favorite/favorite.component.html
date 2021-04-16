@@ -1,0 +1,11 @@
+<ng-container *ngIf="(savedItem$ | async) as items$">
+  <section class="wrapper">
+    <div class="item" *ngFor="let item of items$">
+      <div class="item-img">
+        <img [src]="item?.url">
+      </div>
+      <div class="title">{{item?.title}}</div>
+      <div class="description">{{item?.description}}</div>
+    </div>
+  </section>
+</ng-container>
